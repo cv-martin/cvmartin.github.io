@@ -1794,6 +1794,12 @@ canvas[id*="neural"] {
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 
+/* Fallback for blocked JS: Show content by default if no script adds classes */
+.no-js .reveal-on-scroll {
+  opacity: 1;
+  transform: none;
+}
+
 /* Premium Cursor Glow */
 .cursor-glow {
   width: 400px;
