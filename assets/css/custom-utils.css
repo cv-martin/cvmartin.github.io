@@ -1774,3 +1774,158 @@ canvas[id*="neural"] {
   50% { box-shadow: 0 0 25px rgba(56, 189, 248, 0.3), 0 0 8px rgba(56, 189, 248, 0.15); }
 }
 
+
+/* Scroll Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Delay Utilities */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Premium Cursor Glow */
+.cursor-glow {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: screen;
+}
+
+.cursor-hover {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, transparent 70%);
+}
+
+/* Section Transitions */
+.section-divider {
+  height: 100px;
+  background: linear-gradient(180deg, transparent, rgba(56, 189, 248, 0.05));
+  margin-top: -100px;
+  pointer-events: none;
+}
+
+/* Impact Metrics Grid */
+.impact-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  border-left: 2px solid var(--text-secondary);
+  padding-left: 20px;
+}
+
+.impact-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.impact-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
+.impact-label {
+  font-size: 0.8rem;
+  color: var(--text-paragraph);
+  margin-top: 5px;
+}
+
+/* Hero Spotlight Overlay */
+.hero-spotlight {
+  background: rgba(56, 189, 248, 0.05);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 12px;
+  padding: 15px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: inline-block;
+  max-width: 100%;
+}
+
+.spotlight-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.spotlight-text {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-white);
+  margin: 0;
+}
+
+/* Skill Category Layout */
+.skills-category-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-white);
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.skills-category-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: var(--text-secondary);
+}
+
+.skills-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-tag {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-paragraph);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.skill-tag:hover {
+  background: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.3);
+  color: var(--text-secondary);
+  transform: translateY(-2px);
+}
+
+.skill-tag.holographic {
+  background: rgba(56, 189, 248, 0.05);
+  border-color: rgba(56, 189, 248, 0.2);
+  color: var(--text-secondary);
+  box-shadow: 0 4px 15px rgba(56, 189, 248, 0.1);
+}
