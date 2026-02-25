@@ -295,7 +295,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="services__card glass">
           <span class="services__card--icon">
-            <img src="assets/img/icon/angular.svg" alt="Angular" title="Frontend Leadership">
+            <img src="assets/img/icon/react.svg" alt="React" title="Frontend Leadership">
           </span>
           <div class="services__card--content">
             <h3 class="services__card--title">Frontend Leadership</h3>
@@ -327,7 +327,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="services__card glass">
           <span class="services__card--icon">
-            <img src="assets/img/icon/aws.svg" alt="AWS" title="Backend & Cloud">
+            <img src="assets/img/icon/nodejs.svg" alt="Node.js" title="Backend & Cloud">
           </span>
           <div class="services__card--content">
             <h3 class="services__card--title">Backend & Cloud</h3>
@@ -358,7 +358,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="services__card glass">
           <span class="services__card--icon">
-            <img src="assets/img/icon/nodejs.svg" alt="DevOps" title="DevOps & Release Engineering">
+            <img src="assets/img/icon/aws.svg" alt="AWS" title="DevOps & Release Engineering">
           </span>
           <div class="services__card--content">
             <h3 class="services__card--title">DevOps & Release Engineering</h3>
@@ -374,7 +374,7 @@
       <div class="col-lg-4 col-md-6">
         <div class="services__card glass">
           <span class="services__card--icon">
-            <img src="assets/img/icon/angular.svg" alt="Angular" title="End-to-End Ownership" class="hue-rotate-180">
+            <img src="assets/img/icon/angular.svg" alt="Angular" title="End-to-End Ownership">
           </span>
           <div class="services__card--content">
             <h3 class="services__card--title">End-to-End Ownership</h3>
@@ -1208,6 +1208,8 @@
           console.error("Bootstrap modal failed to load", e);
         }
       }
+    }
+  });
 </script>
 
 <!-- Cosmic Aesthetic Layer -->
@@ -1225,82 +1227,82 @@
 <div class="star-container" id="star-field"></div>
 <!-- Premium Visual Logic (Inline for Local Support) -->
 <script>
-      // 0. Star Field Generation (Phase 3)
-      const initStarField = function () {
-        const container = document.getElementById('star-field');
-        if (!container) return;
-        const starCount = 150;
-        for (let i = 0; i < starCount; i++) {
-          const star = document.createElement('div');
-          star.className = 'star';
-          const size = Math.random() * 2 + 1;
-          star.style.width = `${size}px`;
-          star.style.height = `${size}px`;
-          star.style.left = `${Math.random() * 100}%`;
-          star.style.top = `${Math.random() * 100}%`;
-          star.style.animationDelay = `${Math.random() * 5}s`;
-          star.style.animationDuration = `${3 + Math.random() * 4}s`;
-          container.appendChild(star);
+  // 0. Star Field Generation (Phase 3)
+  const initStarField = function () {
+    const container = document.getElementById('star-field');
+    if (!container) return;
+    const starCount = 150;
+    for (let i = 0; i < starCount; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 2 + 1;
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDelay = `${Math.random() * 5}s`;
+      star.style.animationDuration = `${3 + Math.random() * 4}s`;
+      container.appendChild(star);
+    }
+  };
+
+  // 1. Mouse Tracking for Card Glows
+  document.querySelectorAll('.services__card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // 2. Scroll Reveal Animations
+  const revealOnScroll = function () {
+    const revealCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
         }
-      };
-
-      // 1. Mouse Tracking for Card Glows
-      document.querySelectorAll('.services__card').forEach(card => {
-        card.addEventListener('mousemove', e => {
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          card.style.setProperty('--mouse-x', `${x}px`);
-          card.style.setProperty('--mouse-y', `${y}px`);
-        });
       });
+    };
+    const revealObserver = new IntersectionObserver(revealCallback, {
+      threshold: 0.05,
+      rootMargin: "0px 0px -50px 0px"
+    });
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
+  };
 
-      // 2. Scroll Reveal Animations
-      const revealOnScroll = function () {
-        const revealCallback = (entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('revealed');
-              observer.unobserve(entry.target);
-            }
-          });
-        };
-        const revealObserver = new IntersectionObserver(revealCallback, {
-          threshold: 0.05,
-          rootMargin: "0px 0px -50px 0px"
-        });
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
-      };
+  // 3. Cursor Glow Effect
+  const initCursorGlow = function () {
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+    document.addEventListener('mousemove', (e) => {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top = e.clientY + 'px';
+    });
+    const interactive = document.querySelectorAll('a, button, .portfolio__card, .services__card');
+    interactive.forEach(el => {
+      el.addEventListener('mouseenter', () => glow.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => glow.classList.remove('cursor-hover'));
+    });
+  };
 
-      // 3. Cursor Glow Effect
-      const initCursorGlow = function () {
-        const glow = document.createElement('div');
-        glow.className = 'cursor-glow';
-        document.body.appendChild(glow);
-        document.addEventListener('mousemove', (e) => {
-          glow.style.left = e.clientX + 'px';
-          glow.style.top = e.clientY + 'px';
-        });
-        const interactive = document.querySelectorAll('a, button, .portfolio__card, .services__card');
-        interactive.forEach(el => {
-          el.addEventListener('mouseenter', () => glow.classList.add('cursor-hover'));
-          el.addEventListener('mouseleave', () => glow.classList.remove('cursor-hover'));
-        });
-      };
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    initStarField();
+    revealOnScroll();
+    initCursorGlow();
 
-      // Initialize
-      document.addEventListener('DOMContentLoaded', () => {
-        initStarField();
-        revealOnScroll();
-        initCursorGlow();
-
-        // Safety Fallback: Reveal all after 3 seconds
-        setTimeout(() => {
-          document.querySelectorAll('.reveal-on-scroll:not(.revealed)').forEach(el => {
-            el.classList.add('revealed');
-          });
-        }, 3000);
+    // Safety Fallback: Reveal all after 3 seconds
+    setTimeout(() => {
+      document.querySelectorAll('.reveal-on-scroll:not(.revealed)').forEach(el => {
+        el.classList.add('revealed');
       });
+    }, 3000);
+  });
 </script>
 
 </body>

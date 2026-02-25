@@ -176,6 +176,7 @@
 
 .services__card.glass .services__card--icon {
   background: rgba(15, 23, 42, 0.6);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(56, 189, 248, 0.3);
   width: 70px;
