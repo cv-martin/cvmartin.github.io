@@ -383,25 +383,22 @@
         </div>
       </div>
 
-      <!-- Creative -->
+      <!-- DevOps & Release Engineering -->
       <div class="col-lg-4 col-md-6">
         <div class="services__card glass">
           <span class="services__card--icon color5">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              class="feather feather-box">
-              <path
-                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-              </path>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-              <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              class="feather feather-terminal">
+              <polyline points="4 17 10 11 4 5"></polyline>
+              <line x1="12" y1="19" x2="20" y2="19"></line>
             </svg>
           </span>
           <div class="services__card--content">
-            <h3 class="services__card--title">3D & Creative Tech</h3>
+            <h3 class="services__card--title">DevOps & Release Engineering</h3>
             <p class="services__card--desc">
-              Experiments with Blender and Unreal Engine 5, pushing 3D interactivity beyond the traditional browser
-              screen.
+              Building CI/CD platforms (Jenkins, Harness), K8s/Helm orchestration, and IaC (Terraform) to
+              standardize multi-environment enterprise deployments.
             </p>
           </div>
         </div>
@@ -642,6 +639,20 @@
             <span class="resume__content--subtitle">Ness Technologies</span>
             <p>Delivered AI-assisted healthcare solutions focused on HIPAA compliance and enterprise-grade frontend
               architecture.</p>
+            <p>Bridging Design, Engineering & AI | DevOps & Release Engineering Expertise.</p>
+            <p><strong>DevOps & Platform Engineering:</strong></p>
+            <ul>
+              <li>9+ years of experience building and supporting CI/CD platforms, cloud infrastructure, and production
+                deployments for enterprise applications.</li>
+              <li>Strong background in Jenkins + Harness, Kubernetes + Helm, and Infrastructure-as-Code
+                (Terraform/CloudFormation/ARM) across AWS and Azure.</li>
+              <li>Proven track record in release management, environment promotions (DEV→QA→UAT→PROD), and incident
+                troubleshooting (pods, ingress/service routing).</li>
+              <li>Hands-on with artifact repositories (Artifactory/Nexus), configuration automation
+                (Ansible/Chef/Puppet), and ITSM delivery using Jira/ServiceNow.</li>
+              <li>Integrated component-based UI architectures with robust CI/CD pipelines to ensure rapid, secure
+                production delivery.</li>
+            </ul>
             <p><strong>Key Contributions:</strong></p>
             <ul>
               <li>Delivered Angular-driven frontend solutions for HIPAA-compliant healthcare platforms serving sensitive
@@ -1237,56 +1248,73 @@
           console.error("Bootstrap modal failed to load", e);
         }
       }
-    }
-  });
+</script>
 
-  // --- Premium Visual Logic (Inline for Local Support) ---
+<!-- Background Blobs (Injection of Life) -->
+<div class="bg-blob-container">
+  <div class="bg-blob bg-blob-1"></div>
+  <div class="bg-blob bg-blob-2"></div>
+  <div class="bg-blob bg-blob-3"></div>
+</div>
 
-  // 1. Scroll Reveal Animations
-  const revealOnScroll = function () {
-    const revealCallback = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          observer.unobserve(entry.target);
-        }
+<!-- Premium Visual Logic (Inline for Local Support) -->
+<script>
+      // 1. Mouse Tracking for Card Glows
+      document.querySelectorAll('.services__card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
+        });
       });
-    };
-    const revealObserver = new IntersectionObserver(revealCallback, {
-      threshold: 0.05, // Lower threshold for better resilience
-      rootMargin: "0px 0px -50px 0px"
-    });
-    document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
-  };
 
-  // 2. Cursor Glow Effect
-  const initCursorGlow = function () {
-    const glow = document.createElement('div');
-    glow.className = 'cursor-glow';
-    document.body.appendChild(glow);
-    document.addEventListener('mousemove', (e) => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top = e.clientY + 'px';
-    });
-    const interactive = document.querySelectorAll('a, button, .portfolio__card, .services__card');
-    interactive.forEach(el => {
-      el.addEventListener('mouseenter', () => glow.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => glow.classList.remove('cursor-hover'));
-    });
-  };
+      // 2. Scroll Reveal Animations
+      const revealOnScroll = function () {
+        const revealCallback = (entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        };
+        const revealObserver = new IntersectionObserver(revealCallback, {
+          threshold: 0.05,
+          rootMargin: "0px 0px -50px 0px"
+        });
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
+      };
 
-  // Initialize
-  document.addEventListener('DOMContentLoaded', () => {
-    revealOnScroll();
-    initCursorGlow();
+      // 3. Cursor Glow Effect
+      const initCursorGlow = function () {
+        const glow = document.createElement('div');
+        glow.className = 'cursor-glow';
+        document.body.appendChild(glow);
+        document.addEventListener('mousemove', (e) => {
+          glow.style.left = e.clientX + 'px';
+          glow.style.top = e.clientY + 'px';
+        });
+        const interactive = document.querySelectorAll('a, button, .portfolio__card, .services__card');
+        interactive.forEach(el => {
+          el.addEventListener('mouseenter', () => glow.classList.add('cursor-hover'));
+          el.addEventListener('mouseleave', () => glow.classList.remove('cursor-hover'));
+        });
+      };
 
-    // Safety Fallback: Reveal all after 3 seconds if JS fails or intersection fails
-    setTimeout(() => {
-      document.querySelectorAll('.reveal-on-scroll:not(.revealed)').forEach(el => {
-        el.classList.add('revealed');
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        revealOnScroll();
+        initCursorGlow();
+
+        // Safety Fallback: Reveal all after 3 seconds
+        setTimeout(() => {
+          document.querySelectorAll('.reveal-on-scroll:not(.revealed)').forEach(el => {
+            el.classList.add('revealed');
+          });
+        }, 3000);
       });
-    }, 3000);
-  });
 </script>
 
 </body>
