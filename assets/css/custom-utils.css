@@ -1211,10 +1211,17 @@ canvas[id*="neural"] {
 
 /* Hero AI Glass - Restored Premium Glow */
 .hero-ai-glass {
-  animation: subtleGlow 4s ease-in-out infinite alternate !important;
+  animation: 
+    subtleGlow 4s ease-in-out infinite alternate,
+    celestialRotation 60s linear infinite !important;
   box-shadow: 
     0 0 60px rgba(56, 189, 248, 0.3),
     0 0 120px rgba(129, 140, 248, 0.15) !important;
+}
+
+@keyframes celestialRotation {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 @keyframes subtleGlow {
