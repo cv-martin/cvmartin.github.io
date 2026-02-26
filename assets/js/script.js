@@ -11,24 +11,24 @@
 const preLoader = function () {
   let preloaderWrapper = document.getElementById("preloader");
   
-  // Guaranteed fallback: remove preloader after 2 seconds no matter what
+  // Guaranteed fallback: remove preloader after 1 second no matter what for mobile performance
   const forceRemove = setTimeout(function() {
     if (preloaderWrapper && preloaderWrapper.parentNode) {
       preloaderWrapper.classList.add("preloaded");
       setTimeout(() => preloaderWrapper.remove(), 500);
     }
-  }, 2000);
+  }, 1000);
   
-  // Normal load behavior (if it fires first, great - clears the fallback)
+  // Normal load behavior
   window.addEventListener("load", () => {
-    clearTimeout(forceRemove); // Cancel fallback if load fires normally
+    clearTimeout(forceRemove); 
     if (preloaderWrapper) {
       setTimeout(function () {
         preloaderWrapper.classList.add("preloaded");
-      }, 300);
+      }, 200);
       setTimeout(function () {
         preloaderWrapper.remove();
-      }, 1000);
+      }, 800);
     }
   });
 };
