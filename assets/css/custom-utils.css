@@ -69,21 +69,25 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* 2026 Section Spacing Fixes (Avoid Overlaps) */
+/* 2026 Hero: Perfect viewport fit */
 .hero__section {
   min-height: 100vh;
-  padding-top: 10rem;
+  padding-top: 0;
+  padding-bottom: 0;
   display: flex;
   align-items: center;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 .services__section {
   position: relative;
   z-index: 2;
-  margin-top: -5rem; /* Slight overlap for fluid feel, but with padding protection */
-  padding-top: 10rem !important;
+  margin-top: 0;
+  /* Override the massive section--padding (10rem top+bottom at 1200px+) */
+  padding-top: 5rem !important;
+  padding-bottom: 5rem !important;
   background: var(--bg-dark);
 }
 
@@ -97,7 +101,11 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 14px;
+  /* Remove the 380px floor — let cards be as short as content needs */
+  min-height: unset !important;
+  /* Override the 5rem 4rem 4rem padding at 1366px+ */
+  padding: 1.6rem 1.8rem !important;
 }
 
 .services__card::after {
@@ -123,6 +131,55 @@
 .services__card:hover::after {
   opacity: 1;
 }
+
+/* ── Services section: compact to fit ONE viewport ── */
+
+/* Heading area: cut mb-50 (50px) to something reasonable */
+.services__section .section__heading--topbar.mb-50 {
+  margin-bottom: 2rem !important;
+}
+
+/* Section heading title smaller */
+.services__section .section__heading--title {
+  font-size: clamp(1.8rem, 2.5vw, 2.8rem) !important;
+  line-height: 1.2 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Card icon: tighter */
+.services__card .services__card--icon {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+  margin-bottom: 1rem !important;
+}
+.services__card .services__card--icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Card title */
+.services__card .services__card--title {
+  font-size: clamp(1.4rem, 1.4vw, 1.7rem) !important;
+  margin-bottom: 0.6rem !important;
+  line-height: 1.3 !important;
+}
+
+/* Card description */
+.services__card .services__card--desc {
+  font-size: clamp(1.25rem, 1.1vw, 1.45rem) !important;
+  line-height: 1.55 !important;
+  margin-bottom: 0 !important;
+  opacity: 0.85 !important;
+}
+
+/* Grid row gap: reduce from Bootstrap g-4 (1.5rem) */
+.services__section .row.g-4 {
+  --bs-gutter-y: 1.2rem !important;
+  --bs-gutter-x: 1.4rem !important;
+}
+
 
 /* =========================================
    ABOUT SECTION LAYOUT FIX (SQUISH/OVERFLOW)
@@ -1587,7 +1644,7 @@ canvas[id*="neural"] {
 
 @keyframes orbit-spin {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to   { transform: rotate(360deg); }  /* clockwise */
 }
 
 /* Counter-rotate icons to keep them upright */
@@ -1597,7 +1654,7 @@ canvas[id*="neural"] {
 
 @keyframes counter-spin {
   from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  to   { transform: rotate(-360deg); } /* counter-rotate to keep icons upright */
 }
 
 /* Mobile: Smaller orbit */
@@ -2470,3 +2527,324 @@ body {
   color: var(--primary-color) !important;
   filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6)) !important;
 }
+
+
+/* =====================================================
+   HERO — PREMIUM MNC-READY LAYOUT (DEFINITIVE)
+   Goal: Everything visible in one viewport, no scroll.
+   Designed for 1280–1920px desktop, scales down cleanly.
+   ===================================================== */
+
+/* SECTION: Full viewport, flex container */
+.hero__section {
+  min-height: 100vh !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  position: relative !important;
+  z-index: 1 !important;
+  /* No overflow:hidden — it clips orbit ring icons */
+}
+
+/* INNER: Row layout, account for fixed header */
+.hero__section--inner {
+  min-height: 100vh !important;
+  padding: 80px 2rem 32px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 2rem !important;          /* breathing room between orbit and text */
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* ── LEFT COLUMN: Image + Orbit ── */
+.hero__thumbnail {
+  position: relative !important;
+  width: 44% !important;
+  min-width: 0 !important;
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 60px !important;          /* safe zone so icons don’t clip at edges */
+  z-index: 5 !important;
+  overflow: visible !important;
+}
+
+/* Hero sphere image */
+.hero__thumbnail--media.hero-ai-glass {
+  width: clamp(200px, 22vw, 310px) !important;  /* slightly larger for better presence */
+  height: auto !important;
+  border-radius: 50% !important;
+  position: relative !important;
+  z-index: 6 !important;
+  display: block !important;
+}
+
+/* ── ORBIT RING: Contained within thumbnail column ── */
+.tech-orbit {
+  width: clamp(290px, 32vw, 400px) !important;   /* slightly larger — fills the left column better */
+  height: clamp(290px, 32vw, 400px) !important;
+  margin-left: calc(-1 * clamp(290px, 32vw, 400px) / 2) !important;
+  margin-top: calc(-1 * clamp(290px, 32vw, 400px) / 2) !important;
+  z-index: 6 !important;
+}
+
+/* Orbit icons: proportional to ring, always on top */
+.orbit-icon {
+  width: clamp(38px, 3.6vw, 50px) !important;
+  height: clamp(38px, 3.6vw, 50px) !important;
+  padding: 7px !important;
+  z-index: 10 !important;
+  position: absolute !important;
+}
+.orbit-icon img {
+  width: 100% !important;
+  height: 100% !important;
+}
+.orbit-icon:nth-child(1) { margin-left: calc(-1 * clamp(38px, 3.6vw, 50px) / 2) !important; }
+.orbit-icon:nth-child(2) { margin-right: calc(-1 * clamp(38px, 3.6vw, 50px) / 2) !important; }
+.orbit-icon:nth-child(3) { margin-right: calc(-1 * clamp(38px, 3.6vw, 50px) / 2) !important; }
+.orbit-icon:nth-child(4) { margin-left: calc(-1 * clamp(38px, 3.6vw, 50px) / 2) !important; }
+.orbit-icon:nth-child(5) { margin-left: calc(-1 * clamp(38px, 3.6vw, 50px) / 2) !important; }
+.orbit-icon:nth-child(6) { margin-left: calc(-1 * clamp(38px, 3.6vw, 50px) / 2) !important; }
+
+/* ── RIGHT COLUMN: Content ── */
+.hero__content {
+  width: 56% !important;
+  min-width: 0 !important;
+  padding: 0 3rem 0 1rem !important;  /* left padding puts gap between orbit & text */
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  z-index: 2 !important;              /* below thumbnail z-index:5 */
+}
+
+@media (max-width: 1400px) {
+  .hero__content { padding: 0 2rem 0 0.5rem !important; }
+}
+@media (max-width: 1200px) {
+  .hero__content { padding: 0 1rem 0 0.5rem !important; }
+}
+
+/* ── TYPOGRAPHY: Premium scale ── */
+
+/* "HELLO I'M" */
+.hero__content--subtitle {
+  font-size: 1.3rem !important;
+  line-height: 1.2 !important;
+  font-style: italic !important;
+  letter-spacing: 0.15em !important;
+  margin-bottom: 0.6rem !important;
+  display: block !important;
+}
+
+/* "Vasni Martin" — the hero name, must be BOLD & large */
+.hero__content--title {
+  font-size: clamp(4rem, 4.5vw, 5.8rem) !important;
+  line-height: 1.0 !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Role title gradient */
+.hero__content--subtitle2 {
+  font-size: clamp(1.4rem, 1.55vw, 2rem) !important;
+  line-height: 1.45 !important;
+  font-weight: 500 !important;
+  margin-bottom: 0.6rem !important;
+}
+
+/* Specialist line */
+.hero__content--subtitle3 {
+  font-size: clamp(1.2rem, 1.1vw, 1.5rem) !important;
+  line-height: 1.3 !important;
+  opacity: 0.7 !important;
+  font-weight: 400 !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Description paragraph */
+.hero__content--desc {
+  font-size: clamp(1.3rem, 1.15vw, 1.6rem) !important;
+  line-height: 1.65 !important;
+  margin-bottom: 1rem !important;
+  opacity: 0.9 !important;
+}
+
+/* Crush the huge mb-* utility margins inside hero only */
+.hero__content .mb-10 { margin-bottom: 0.6rem !important; }
+.hero__content .mb-15 { margin-bottom: 0.6rem !important; }
+.hero__content .mb-20 { margin-bottom: 0.6rem !important; }
+.hero__content .mb-30 { margin-bottom: 1rem !important; }
+.hero__content .mt-20 { margin-top: 0.6rem !important; }
+
+/* ── SPOTLIGHT CARD: "Currently Building" ── */
+.hero-spotlight {
+  display: inline-flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+  padding: 10px 16px !important;
+  background: rgba(15, 23, 42, 0.9) !important;
+  border: 1px solid rgba(56, 189, 248, 0.3) !important;
+  border-radius: 10px !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
+  max-width: min(380px, 90%) !important;
+  margin-top: 0 !important;
+  margin-bottom: 1rem !important;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.08) !important;
+}
+
+.spotlight-badge {
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.18em !important;
+  color: #38bdf8 !important;
+  text-transform: uppercase !important;
+  font-family: 'Space Grotesk', sans-serif !important;
+}
+
+.spotlight-text {
+  font-size: 1.25rem !important;
+  line-height: 1.45 !important;
+  color: rgba(226, 232, 240, 0.92) !important;
+  margin: 0 !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* ── CTA HIGHLIGHT TEXT ── */
+.cta-highlight {
+  display: block !important;
+  font-size: clamp(1.2rem, 1.1vw, 1.5rem) !important;
+  color: #38bdf8 !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.01em !important;
+  margin-top: 0.2rem !important;
+  margin-bottom: 1.4rem !important;
+}
+
+/* ── FOOTER ROW: Button + Social ── */
+.hero__content--footer {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 2rem !important;
+  margin-top: 0 !important;
+}
+
+.social__share {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+  gap: 1rem !important;
+}
+
+.social__share--wrapper {
+  display: flex !important;
+  gap: 0.7rem !important;
+  flex-wrap: nowrap !important;
+}
+
+.social__share--title {
+  font-size: 1.5rem !important;
+  white-space: nowrap !important;
+  font-weight: 500 !important;
+}
+
+/* ── HIDE SR-ONLY ── */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ── TABLET ≤ 991px ── */
+@media (max-width: 991px) {
+  .hero__section--inner {
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-top: 9rem !important;
+    padding-bottom: 4rem !important;
+    min-height: unset !important;
+    gap: 3rem !important;
+  }
+  .hero__thumbnail {
+    width: 100% !important;
+    padding: 55px !important;
+  }
+  .hero__content {
+    width: 100% !important;
+    padding: 0 2rem 0 !important;
+    text-align: center !important;
+  }
+  .hero-spotlight,
+  .hero__content--footer {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    justify-content: center !important;
+  }
+  .social__share--wrapper {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+  }
+}
+
+/* ── MOBILE ≤ 575px ── */
+@media (max-width: 575px) {
+  .hero__section--inner {
+    padding-top: 8rem !important;
+  }
+  .hero__thumbnail {
+    padding: 45px !important;
+  }
+  .tech-orbit {
+    width: 290px !important;
+    height: 290px !important;
+    margin-left: -145px !important;
+    margin-top: -145px !important;
+  }
+  .hero__thumbnail--media.hero-ai-glass {
+    width: 160px !important;
+  }
+  .orbit-icon {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 5px !important;
+  }
+  .orbit-icon:nth-child(1) { margin-left: -18px !important; }
+  .orbit-icon:nth-child(2) { margin-right: -18px !important; }
+  .orbit-icon:nth-child(3) { margin-right: -18px !important; }
+  .orbit-icon:nth-child(4) { margin-left: -18px !important; }
+  .orbit-icon:nth-child(5) { margin-left: -18px !important; }
+  .orbit-icon:nth-child(6) { margin-left: -18px !important; }
+  .hero__content--footer {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1.5rem !important;
+  }
+}
+
+/* ── SCREEN-READER ONLY: visually hidden but accessible ── */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  pointer-events: none !important;
+}
+
