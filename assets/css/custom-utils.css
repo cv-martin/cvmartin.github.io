@@ -1258,7 +1258,7 @@ canvas[id*="neural"] {
 
 @keyframes celestialRotation {
   from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  to { transform: rotate(-360deg); }
 }
 
 @keyframes subtleGlow {
@@ -1596,9 +1596,105 @@ canvas[id*="neural"] {
 
 
 /* =========================================
-   SPRINT 8: PREMIUM PORTFOLIO CARDS (2026)
    Cyberpunk / Futuristic Command Center
    ========================================= */
+
+/* Work Life & Style Research Auto-Scroll */
+.work-life__section {
+  background: var(--body-background-color);
+  overflow: hidden;
+  padding: 6rem 0;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.work-life-container {
+  width: 100vw;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.work-life-stream-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+}
+
+.work-life-stream-wrapper::before,
+.work-life-stream-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 15rem;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.work-life-stream-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--body-background-color), transparent);
+}
+
+.work-life-stream-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--body-background-color), transparent);
+}
+
+.work-life-stream-track {
+  display: flex;
+  width: max-content;
+  /* Duration depends on number of images */
+  animation: scroll-work-life 60s linear infinite;
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* Pause on hover so users can see the images */
+.work-life-stream-track:hover {
+  animation-play-state: paused;
+}
+
+.work-life-item {
+  width: 320px;
+  height: 240px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.work-life-item:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 15px 40px rgba(56, 189, 248, 0.2);
+  border-color: rgba(56, 189, 248, 0.3);
+  z-index: 10;
+}
+
+.work-life-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 0.5s ease, transform 0.5s ease;
+  filter: grayscale(60%) brightness(0.8);
+}
+
+.work-life-item:hover img {
+  filter: grayscale(0%) brightness(1.1);
+  transform: scale(1.1);
+}
+
+@keyframes scroll-work-life {
+  0% { transform: translateX(0); }
+  /* -50% shifts halfway which exactly matches the start of the duplicated set */
+  100% { transform: translateX(calc(-50% - 1rem)); }
+}
+
 
 /* 1. Card Container — Fixed Aspect Ratio + Cyberpunk Border */
 .portfolio__card {
